@@ -10,9 +10,16 @@ def main():
 			'databaseAuthVariableOverride' : { 'uid' : 'admin-server'} \
 		})
 	#user = auth.get_user('0CD7pHBp2BQYGysfjaP9o6XC0jk2')
-	#print("fetched user: {0}" .format(user.uid)) 
+	#print("fetched user: {0}" .format(user.uid))
 	ref = db.reference('/users/0CD7pHBp2BQYGysfjaP9o6XC0jk2')
 	print(ref.get())
+	userRef = db.reference('/users')
+	#Alphabetically return users by their email
+	userSnap = userRef.order_by_child('email').get()
+	print("Searching for me\n")
+	for key, value in userSnap.items():
+		#if(value == "element4lifex8@yahoo.com"):
+		print(key)
 
 if __name__ == "__main__":
 	main()
